@@ -13,7 +13,6 @@ class InfoViewController: UIViewController {
         scroll.backgroundColor = .white
         scroll.layer.borderColor = UIColor.lightGray.cgColor
         scroll.layer.borderWidth = 1
-        scroll.isScrollEnabled = true
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }()
@@ -106,6 +105,8 @@ class InfoViewController: UIViewController {
         self.stackView.addArrangedSubview(self.fifthStepLabel)
         self.stackView.addArrangedSubview(self.sixthStepLabel)
         
+        self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
+        
         NSLayoutConstraint.activate([
             self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -113,18 +114,8 @@ class InfoViewController: UIViewController {
             self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
 
             self.stackView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 22),
-//            self.stackView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
-//            self.stackView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 16),
-            self.stackView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor)
-            
-//            self.titleLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.followingStepsLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.firstStepLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.secondStepLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.thirdStepLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.fourthStepLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.fifthStepLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor),
-//            self.sixthStepLabel.widthAnchor.constraint(equalTo: self.stackView.widthAnchor)
+            self.stackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            self.stackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
     }
 }
