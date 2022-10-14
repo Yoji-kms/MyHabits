@@ -28,58 +28,56 @@ class InfoViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Info title", comment: "Info title")
-        label.textColor = .black
-        label.font = .systemFont(ofSize: 20, weight: .semibold)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.titleSetup()
         return label
     }()
     
     private lazy var followingStepsLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Following steps", comment: "Following steps")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
     private lazy var firstStepLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("First step", comment: "First step")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
     private lazy var secondStepLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Second step", comment: "Second step")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
     private lazy var thirdStepLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Third step", comment: "Third step")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
     private lazy var fourthStepLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Fourth step", comment: "Fourth step")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
     private lazy var fifthStepLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Fifth step", comment: "Fifth step")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
     private lazy var sixthStepLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Sixth step", comment: "Sixth step")
-        label.standardSetup()
+        label.bodySetup()
         return label
     }()
     
@@ -117,14 +115,5 @@ class InfoViewController: UIViewController {
             self.stackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             self.stackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ])
-    }
-}
-
-extension UILabel {
-    func standardSetup() {
-        self.textColor = .black
-        self.font = .systemFont(ofSize: 17, weight: .regular)
-        self.numberOfLines = 0
-        self.translatesAutoresizingMaskIntoConstraints = false
     }
 }

@@ -38,9 +38,9 @@ public final class Habit: Codable {
     }
     
     /// Описание времени выполнения привычки.
-    public var dateString: String {
-        "Каждый день в " + dateFormatter.string(from: date)
-    }
+//    public var dateString: String {
+//        "Каждый день в " + dateFormatter.string(from: date)
+//    }
     
     /// Показывает, была ли сегодня добавлена привычка.
     public var isAlreadyTakenToday: Bool {
@@ -55,12 +55,12 @@ public final class Habit: Codable {
     private var b: CGFloat
     private var a: CGFloat
     
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
-        formatter.timeStyle = .short
-        return formatter
-    }()
+//    private lazy var dateFormatter: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.locale = Locale(identifier: "ru_RU")
+//        formatter.timeStyle = .short
+//        return formatter
+//    }()
     
     private lazy var calendar: Calendar = .current
     

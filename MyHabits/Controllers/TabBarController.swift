@@ -29,7 +29,7 @@ class TabBarController: UITabBarController {
     
     private func setupControllers() {
         self.tabBar.tintColor = UIColor(named: "Purple")
-        self.tabBar.barTintColor = .systemGray
+        self.tabBar.barTintColor = UIColor(named: "Light Gray")
         self.viewControllers = [habitsNavController, infoNavController]
     }
 }
