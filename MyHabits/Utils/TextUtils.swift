@@ -63,7 +63,7 @@ extension UITextView {
     func bodySetup() {
         self.textColor = .lightGray
         self.font = .systemFont(ofSize: 17, weight: .regular)
-        self.backgroundColor = UIColor(named: "Light Gray")
+        self.backgroundColor = .white
         self.isEditable = true
         self.isScrollEnabled = false
         self.textContainer.maximumNumberOfLines = 3

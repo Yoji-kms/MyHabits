@@ -33,11 +33,25 @@ class HabitViewController:UIViewController {
         return btn
     }()
     
-    private lazy var scrlView: UIScrollView = {
-        let scrlView = UIScrollView()
-        scrlView.isScrollEnabled = true
-        scrlView.translatesAutoresizingMaskIntoConstraints = false
-        return scrlView
+    private lazy var borderView: UIView = {
+        let borderView = UIView()
+        borderView.backgroundColor = .lightGray
+        borderView.translatesAutoresizingMaskIntoConstraints = false
+        return borderView
+    }()
+    
+    private lazy var backgroundView: UIView = {
+        let basicView = UIView()
+        basicView.backgroundColor = .white
+        basicView.translatesAutoresizingMaskIntoConstraints = false
+        return basicView
+    }()
+    
+    private lazy var backgroundViewWihPadding: UIView = {
+        let basicView = UIView()
+        basicView.backgroundColor = .white
+        basicView.translatesAutoresizingMaskIntoConstraints = false
+        return basicView
     }()
     
     private lazy var titleLabel: UILabel = {
@@ -127,41 +141,52 @@ class HabitViewController:UIViewController {
     }
     
     private func setupViews() {
-        self.view.addSubview(self.scrlView)
-        self.scrlView.addSubview(self.titleLabel)
-        self.scrlView.addSubview(self.txtView)
-        self.scrlView.addSubview(self.colorLabel)
-        self.scrlView.addSubview(self.colorCircleBtn)
-        self.scrlView.addSubview(self.timeLabel)
-        self.scrlView.addSubview(self.everyDayLabel)
-        self.scrlView.addSubview(self.timePicker)
+        self.view.addSubview(self.borderView)
+        self.view.addSubview(self.backgroundView)
+        self.backgroundView.addSubview(self.backgroundViewWihPadding)
+        
+        self.backgroundViewWihPadding.addSubview(self.titleLabel)
+        self.backgroundViewWihPadding.addSubview(self.txtView)
+        self.backgroundViewWihPadding.addSubview(self.colorLabel)
+        self.backgroundViewWihPadding.addSubview(self.colorCircleBtn)
+        self.backgroundViewWihPadding.addSubview(self.timeLabel)
+        self.backgroundViewWihPadding.addSubview(self.everyDayLabel)
+        self.backgroundViewWihPadding.addSubview(self.timePicker)
         
         NSLayoutConstraint.activate([
-            self.scrlView.heightAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.heightAnchor),
-            self.scrlView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            self.scrlView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            self.borderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.borderView.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            self.borderView.heightAnchor.constraint(equalToConstant: 1),
             
-            self.titleLabel.topAnchor.constraint(equalTo: self.scrlView.topAnchor, constant: 8),
-            self.titleLabel.widthAnchor.constraint(equalTo: self.scrlView.widthAnchor),
+            self.backgroundView.topAnchor.constraint(equalTo: self.borderView.bottomAnchor),
+            self.backgroundView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.backgroundView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor),
             
-            self.txtView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 4),
-            self.txtView.widthAnchor.constraint(equalTo: self.scrlView.widthAnchor),
+            self.backgroundViewWihPadding.heightAnchor.constraint(equalTo: self.backgroundView.heightAnchor),
+            self.backgroundViewWihPadding.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor, constant: 16),
+            self.backgroundViewWihPadding.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -16),
             
-            self.colorLabel.topAnchor.constraint(equalTo: self.txtView.bottomAnchor, constant: 8),
-            self.colorLabel.widthAnchor.constraint(equalTo: self.scrlView.widthAnchor),
+            self.titleLabel.topAnchor.constraint(equalTo: self.backgroundViewWihPadding.topAnchor, constant: 20),
+            self.titleLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
             
-            self.colorCircleBtn.topAnchor.constraint(equalTo: self.colorLabel.bottomAnchor, constant: 4),
+            self.txtView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 8),
+            self.txtView.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
+            
+            self.colorLabel.topAnchor.constraint(equalTo: self.txtView.bottomAnchor, constant: 24),
+            self.colorLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
+            
+            self.colorCircleBtn.topAnchor.constraint(equalTo: self.colorLabel.bottomAnchor, constant: 8),
             self.colorCircleBtn.heightAnchor.constraint(equalToConstant: 30),
             self.colorCircleBtn.widthAnchor.constraint(equalTo: self.colorCircleBtn.heightAnchor),
             
-            self.timeLabel.topAnchor.constraint(equalTo: self.colorCircleBtn.bottomAnchor, constant: 8),
-            self.timeLabel.widthAnchor.constraint(equalTo: self.scrlView.widthAnchor),
+            self.timeLabel.topAnchor.constraint(equalTo: self.colorCircleBtn.bottomAnchor, constant: 24),
+            self.timeLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
             
-            self.everyDayLabel.topAnchor.constraint(equalTo: self.timeLabel.bottomAnchor, constant: 4),
-            self.everyDayLabel.widthAnchor.constraint(equalTo: self.scrlView.widthAnchor),
+            self.everyDayLabel.topAnchor.constraint(equalTo: self.timeLabel.bottomAnchor, constant: 8),
+            self.everyDayLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
 
-            self.timePicker.topAnchor.constraint(equalTo: self.everyDayLabel.bottomAnchor, constant: 4),
-            self.timePicker.widthAnchor.constraint(equalTo: self.scrlView.widthAnchor),
+            self.timePicker.topAnchor.constraint(equalTo: self.everyDayLabel.bottomAnchor, constant: 8),
+            self.timePicker.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
         ])
     }
     
