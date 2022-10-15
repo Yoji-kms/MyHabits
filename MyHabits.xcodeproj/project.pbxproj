@@ -18,6 +18,8 @@
 		F9C6031228EF0B1D00DDF334 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031128EF0B1D00DDF334 /* InfoViewController.swift */; };
 		F9C6031428F1B32A00DDF334 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031328F1B32A00DDF334 /* HabitViewController.swift */; };
 		F9C6031928F4600A00DDF334 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031828F4600A00DDF334 /* TextUtils.swift */; };
+		F9C6031C28FAD37A00DDF334 /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031B28FAD37900DDF334 /* HabitView.swift */; };
+		F9C6031E28FADBA700DDF334 /* HabitsTrackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031D28FADBA700DDF334 /* HabitsTrackView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		F9C6031128EF0B1D00DDF334 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		F9C6031328F1B32A00DDF334 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		F9C6031828F4600A00DDF334 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		F9C6031B28FAD37900DDF334 /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
+		F9C6031D28FADBA700DDF334 /* HabitsTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsTrackView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 		F9C602EA28EF054600DDF334 /* MyHabits */ = {
 			isa = PBXGroup;
 			children = (
+				F9C6031A28FAD35900DDF334 /* Views */,
 				F9C6031728F45FF100DDF334 /* Utils */,
 				F9C6030B28EF09FC00DDF334 /* Controllers */,
 				F9C6030628EF07E000DDF334 /* Data */,
@@ -113,6 +118,15 @@
 				F9C6031828F4600A00DDF334 /* TextUtils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		F9C6031A28FAD35900DDF334 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F9C6031B28FAD37900DDF334 /* HabitView.swift */,
+				F9C6031D28FADBA700DDF334 /* HabitsTrackView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +202,7 @@
 			files = (
 				F9C602EC28EF054600DDF334 /* AppDelegate.swift in Sources */,
 				F9C6031028EF0AE900DDF334 /* HabitsViewController.swift in Sources */,
+				F9C6031E28FADBA700DDF334 /* HabitsTrackView.swift in Sources */,
 				F9C6030828EF07F400DDF334 /* Habit.swift in Sources */,
 				F9C6030D28EF0A1400DDF334 /* TabBarController.swift in Sources */,
 				F9C6030A28EF082900DDF334 /* HabitsStore.swift in Sources */,
@@ -195,6 +210,7 @@
 				F9C6031428F1B32A00DDF334 /* HabitViewController.swift in Sources */,
 				F9C6031928F4600A00DDF334 /* TextUtils.swift in Sources */,
 				F9C602EE28EF054600DDF334 /* SceneDelegate.swift in Sources */,
+				F9C6031C28FAD37A00DDF334 /* HabitView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

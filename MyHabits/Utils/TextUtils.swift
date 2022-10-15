@@ -31,18 +31,18 @@ extension UILabel {
     
     func footnoteCapsSetup() {
         self.textColor = .black
-//        self.text = self.text?.capitalized
         self.font = .systemFont(ofSize: 13, weight: .semibold)
         self.numberOfLines = 0
         self.translatesAutoresizingMaskIntoConstraints = false
     }
     
-//    func footnoteStatusSetup() {
-//        self.textColor = .black
-//        self.font = .systemFont(ofSize: 13, weight: .regular)
-//        self.numberOfLines = 0
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//    }
+    func footnoteStatusSetup() {
+        self.textColor = .black
+        self.font = .systemFont(ofSize: 13, weight: .semibold)
+        self.alpha = 0.5
+        self.numberOfLines = 0
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     func footnoteSetup() {
         self.textColor = .systemGray
