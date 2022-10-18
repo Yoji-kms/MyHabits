@@ -33,8 +33,7 @@ class HabitsViewController: UIViewController {
         let habitVC = HabitViewController()
         habitVC.modalTransitionStyle = .coverVertical
         habitVC.modalPresentationStyle = .popover
-        let havitNC = UINavigationController(rootViewController: habitVC)
         
-        self.navigationController?.present(havitNC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(habitVC, animated: true)
     }
 }
