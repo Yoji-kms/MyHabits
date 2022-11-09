@@ -8,15 +8,35 @@
 import UIKit
 
 class HabitsViewController: UIViewController {
+//    MARK: Views
     private lazy var addBtn: UIBarButtonItem = {
         let btn = UIBarButtonItem()
         btn.image = UIImage(systemName: "plus")
         btn.tintColor = UIColor(named: "Purple")
         btn.target = self
-        btn.action = #selector(tapBtn)
+        btn.action = #selector(tapAddBtn)
         return btn
     }()
-
+    
+    private lazy var habitLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        return layout
+    }()
+    
+    private lazy var habitsCollectionView: UICollectionView = {
+        let colView = UICollectionView(frame: .zero, collectionViewLayout: self.habitLayout)
+        colView.delegate = self
+        colView.dataSource = self
+        colView.backgroundColor = .lightGray
+        colView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: "ProgressCellId")
+        colView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: "HabitCellId")
+        colView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCellId")
+        colView.translatesAutoresizingMaskIntoConstraints = false
+        return colView
+    }()
+    
+//  MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "Light Gray")
@@ -25,16 +45,98 @@ class HabitsViewController: UIViewController {
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateProgress()
+    }
+    
     private func setupViews() {
+        self.view.addSubview(habitsCollectionView)
+        
+        NSLayoutConstraint.activate([
+            self.habitsCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.habitsCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.habitsCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.habitsCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
         
     }
     
-    @objc private func tapBtn() {
+//    MARK: Actions
+    @objc private func tapAddBtn() {
         let habitVC = HabitViewController()
         habitVC.modalTransitionStyle = .coverVertical
         habitVC.modalPresentationStyle = .popover
-        let havitNC = UINavigationController(rootViewController: habitVC)
+           
+        self.navigationController?.pushViewController(habitVC, animated: true)
+    }
+    
+    @objc private func checkboxTap() {
+        updateProgress()
+    }
+    
+    private func updateProgress() {
+        self.habitsCollectionView.reloadData()
+        self.habitsCollectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+    }
+}
+
+extension HabitsViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height: CGFloat = {
+            switch indexPath.section {
+            case 1: return HabitsStore.shared.habits[indexPath.row].name.count > 25 ? 160 : 130
+            default: return 60
+            }
+        }()
         
-        self.navigationController?.present(havitNC, animated: true, completion: nil)
+        return CGSize(width: UIScreen.main.bounds.width - 16, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        16
+    }
+}
+
+extension HabitsViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        2
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        } else {
+            return HabitsStore.shared.habits.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let progressCell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgressCellId", for: indexPath) as? ProgressCollectionViewCell else {
+            let progressCell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCellId", for: indexPath)
+            return progressCell
+        }
+
+        if indexPath.section == 0 {
+            return progressCell
+        }
+        
+        guard let habitCell = collectionView.dequeueReusableCell(withReuseIdentifier: "HabitCellId", for: indexPath) as? HabitCollectionViewCell else {
+            let habitCell = collectionView.dequeueReusableCell(withReuseIdentifier: "DefaultCellId", for: indexPath)
+            return habitCell
+        }
+        
+        habitCell.setup(with: HabitsStore.shared.habits[indexPath.row])
+        habitCell.chechbox.addTarget(self, action: #selector(checkboxTap), for: .touchUpInside)
+        
+        return habitCell
     }
 }
