@@ -33,6 +33,7 @@ class HabitsViewController: UIViewController {
         colView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: "HabitCellId")
         colView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCellId")
         colView.translatesAutoresizingMaskIntoConstraints = false
+        colView.largeContentTitle = NSLocalizedString("Today", comment: "Today")
         return colView
     }()
     
@@ -41,6 +42,8 @@ class HabitsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "Light Gray")
         self.navigationItem.rightBarButtonItem = addBtn
+        self.navigationItem.title = NSLocalizedString("Today", comment: "Today")
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         setupViews()
     }
