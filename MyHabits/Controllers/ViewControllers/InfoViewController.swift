@@ -39,48 +39,6 @@ class InfoViewController: UIViewController {
         return label
     }()
     
-    private lazy var firstStepLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("First step", comment: "First step")
-        label.bodySetup()
-        return label
-    }()
-    
-    private lazy var secondStepLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("Second step", comment: "Second step")
-        label.bodySetup()
-        return label
-    }()
-    
-    private lazy var thirdStepLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("Third step", comment: "Third step")
-        label.bodySetup()
-        return label
-    }()
-    
-    private lazy var fourthStepLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("Fourth step", comment: "Fourth step")
-        label.bodySetup()
-        return label
-    }()
-    
-    private lazy var fifthStepLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("Fifth step", comment: "Fifth step")
-        label.bodySetup()
-        return label
-    }()
-    
-    private lazy var sixthStepLabel: UILabel = {
-        let label = UILabel()
-        label.text = NSLocalizedString("Sixth step", comment: "Sixth step")
-        label.bodySetup()
-        return label
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = NSLocalizedString("Info", comment: "Info")
@@ -96,12 +54,6 @@ class InfoViewController: UIViewController {
         
         self.stackView.addArrangedSubview(self.titleLabel)
         self.stackView.addArrangedSubview(self.followingStepsLabel)
-        self.stackView.addArrangedSubview(self.firstStepLabel)
-        self.stackView.addArrangedSubview(self.secondStepLabel)
-        self.stackView.addArrangedSubview(self.thirdStepLabel)
-        self.stackView.addArrangedSubview(self.fourthStepLabel)
-        self.stackView.addArrangedSubview(self.fifthStepLabel)
-        self.stackView.addArrangedSubview(self.sixthStepLabel)
         
         self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
         
