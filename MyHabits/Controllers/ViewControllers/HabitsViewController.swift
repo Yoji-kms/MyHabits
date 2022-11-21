@@ -62,7 +62,6 @@ class HabitsViewController: UIViewController {
             self.habitsCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             self.habitsCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
-        
     }
     
 //    MARK: Actions
