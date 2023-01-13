@@ -101,6 +101,8 @@ class HabitViewController:UIViewController {
         return picker
     }()
     
+    weak var delegate: UpdateScreenDelegate?
+    
 //    MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -197,6 +199,12 @@ class HabitViewController:UIViewController {
         let store = HabitsStore.shared
         store.habits.append(savingHabit)
         navigationController?.popViewController(animated: true)
+        guard let delegate = self.delegate else {
+            return
+        }
+        print(store.todayProgress * 100)
+
+        delegate.updateScreen?()
     }
     
     @objc private func colorCircleTap() {
@@ -220,7 +228,7 @@ class HabitViewController:UIViewController {
     }
 }
 
-//MARK: Delegates
+//MARK: Extensions
 extension HabitViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.colorCircleBtn.backgroundColor = viewController.selectedColor

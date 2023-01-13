@@ -18,8 +18,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     private lazy var progressLabel: UILabel = {
         let label = UILabel()
         label.footnoteStatusSetup()
-        let progress = Int(HabitsStore.shared.todayProgress * 100)
-        label.text = String(progress) + "%"
+        label.text = progressText()
         return label
     }()
     
@@ -43,6 +42,16 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func prepareForReuse() {
+        self.progressLabel.text = progressText()
+        self.progressSlider.value = HabitsStore.shared.todayProgress
+    }
+    
+    private func progressText() -> String {
+        let progress = Int(HabitsStore.shared.todayProgress * 100)
+        return String(progress) + "%"
     }
     
     private func setupViews() {

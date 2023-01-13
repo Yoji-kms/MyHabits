@@ -41,6 +41,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     private weak var habit: Habit?
     
+    weak var delegate: CheckboxDelegate?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -95,17 +97,28 @@ class HabitCollectionViewCell: UICollectionViewCell {
             self.counterLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             self.counterLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
         ])
-        
+    }
+    
+    private func updateViews() {
+        self.chechbox.isEnabled = false
+        self.chechbox.isChecked = true
+        self.counterLabel.text = NSLocalizedString("Counter", comment: "Counter") + String(habit?.trackDates.count ?? -1)
     }
     
     @objc private func checkboxTap() {
+        print(self.nameLabel.text ?? "no text")
+
         guard let trackingHabit = habit else {
             print("No habit")
             return
         }
         if !trackingHabit.isAlreadyTakenToday {
             HabitsStore.shared.track(trackingHabit)
-            self.chechbox.isEnabled = false
+            updateViews()
         }
+        
+        guard let delegate = self.delegate else { return }
+        delegate.checkboxTap?()
     }
 }
+

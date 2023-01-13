@@ -50,7 +50,7 @@ class HabitsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.updateProgress()
+//        self.updateProgress()
     }
     
     private func setupViews() {
@@ -69,17 +69,14 @@ class HabitsViewController: UIViewController {
         let habitVC = HabitViewController()
         habitVC.modalTransitionStyle = .coverVertical
         habitVC.modalPresentationStyle = .popover
+        habitVC.delegate = self
            
         self.navigationController?.pushViewController(habitVC, animated: true)
     }
-    
-    @objc private func checkboxTap() {
-        updateProgress()
-    }
-    
+
     private func updateProgress() {
-        self.habitsCollectionView.reloadData()
-        self.habitsCollectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+        let index = IndexPath(row: 0, section: 0)
+        self.habitsCollectionView.reloadItems(at: [index])
     }
 }
 
@@ -137,8 +134,20 @@ extension HabitsViewController: UICollectionViewDataSource {
         }
         
         habitCell.setup(with: HabitsStore.shared.habits[indexPath.row])
-        habitCell.chechbox.addTarget(self, action: #selector(checkboxTap), for: .touchUpInside)
+        habitCell.delegate = self
         
         return habitCell
+    }
+}
+
+extension HabitsViewController: CheckboxDelegate {
+    func checkboxTap() {
+        updateProgress()
+    }
+}
+extension HabitsViewController: UpdateScreenDelegate {
+    func updateScreen() {
+        self.habitsCollectionView.reloadSections(IndexSet(integer: 1))
+        updateProgress()
     }
 }
