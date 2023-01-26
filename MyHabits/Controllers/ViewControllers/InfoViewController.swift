@@ -32,9 +32,9 @@ class InfoViewController: UIViewController {
         return label
     }()
     
-    private lazy var stepsLabel: UILabel = {
+    private lazy var followingStepsLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("Steps", comment: "Steps")
+        label.text = NSLocalizedString("Following steps", comment: "Following steps")
         label.bodySetup()
         return label
     }()
@@ -53,7 +53,7 @@ class InfoViewController: UIViewController {
         self.scrollView.addSubview(stackView)
         
         self.stackView.addArrangedSubview(self.titleLabel)
-        self.stackView.addArrangedSubview(self.stepsLabel)
+        self.stackView.addArrangedSubview(self.followingStepsLabel)
         
         self.stackView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor).isActive = true
         

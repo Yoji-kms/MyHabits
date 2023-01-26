@@ -30,6 +30,7 @@ class HabitViewController:UIViewController {
         btn.target = self
         btn.action = #selector(saveBtnTap)
         btn.tintColor = UIColor(named: "Purple")
+        btn.isEnabled = false
         return btn
     }()
     
@@ -113,6 +114,8 @@ class HabitViewController:UIViewController {
         picker.translatesAutoresizingMaskIntoConstraints = false
         return picker
     }()
+    
+    weak var delegate: UpdateScreenDelegate?
     
 //    MARK: Lifecycle
     override func viewDidLoad() {
@@ -209,7 +212,7 @@ class HabitViewController:UIViewController {
     
 //    MARK: Actions
     @objc private func cancelBtnTap() {
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func saveBtnTap() {
@@ -220,7 +223,13 @@ class HabitViewController:UIViewController {
         )
         let store = HabitsStore.shared
         store.habits.append(savingHabit)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+        guard let delegate = self.delegate else {
+            return
+        }
+        print(store.todayProgress * 100)
+
+        delegate.updateScreen?()
     }
     
     @objc private func colorCircleTap() {
@@ -244,7 +253,7 @@ class HabitViewController:UIViewController {
     }
 }
 
-//MARK: Delegates
+//MARK: Extensions
 extension HabitViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         self.colorCircleBtn.backgroundColor = viewController.selectedColor
@@ -267,6 +276,22 @@ extension HabitViewController: UITextViewDelegate {
         if textView.text.isEmpty || textView.text == "" {
             textView.textColor = .lightGray
             textView.text = NSLocalizedString("Run in the morning...", comment: "Run...")
+        } else {
+            self.saveBtn.isEnabled = true
         }
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty || textView.text == "" {
+            self.saveBtn.isEnabled = false
+        }
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard text.rangeOfCharacter(from: CharacterSet.newlines) == nil else {
+            return false
+        }
+        return true
+    }
 }
+

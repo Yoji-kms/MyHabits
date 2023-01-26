@@ -61,12 +61,13 @@ extension UILabel {
 
 extension UITextView {
     func bodySetup() {
+        self.enablesReturnKeyAutomatically = true
         self.textColor = .lightGray
         self.font = .systemFont(ofSize: 17, weight: .regular)
         self.backgroundColor = .white
         self.isEditable = true
         self.isScrollEnabled = false
-        self.textContainer.maximumNumberOfLines = 3
+        self.textContainer.maximumNumberOfLines = 2
         self.textContainer.lineBreakMode = .byClipping
         self.translatesAutoresizingMaskIntoConstraints = false
     }
