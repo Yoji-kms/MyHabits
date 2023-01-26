@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F9A8196D290562FB0033060A /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A8196C290562FB0033060A /* Checkbox.swift */; };
 		F9C602EC28EF054600DDF334 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C602EB28EF054600DDF334 /* AppDelegate.swift */; };
 		F9C602EE28EF054600DDF334 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C602ED28EF054600DDF334 /* SceneDelegate.swift */; };
 		F9C602F528EF054800DDF334 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9C602F428EF054800DDF334 /* Assets.xcassets */; };
@@ -18,9 +19,14 @@
 		F9C6031228EF0B1D00DDF334 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031128EF0B1D00DDF334 /* InfoViewController.swift */; };
 		F9C6031428F1B32A00DDF334 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031328F1B32A00DDF334 /* HabitViewController.swift */; };
 		F9C6031928F4600A00DDF334 /* TextUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031828F4600A00DDF334 /* TextUtils.swift */; };
+		F9C6031C28FAD37A00DDF334 /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031B28FAD37900DDF334 /* HabitCollectionViewCell.swift */; };
+		F9C6031E28FADBA700DDF334 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */; };
+		F9DB12F3296B397A0067578D /* CheckboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F2296B397A0067578D /* CheckboxDelegate.swift */; };
+		F9DB12F5296B487A0067578D /* UpdateScreenDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F9A8196C290562FB0033060A /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		F9C602E828EF054600DDF334 /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9C602EB28EF054600DDF334 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F9C602ED28EF054600DDF334 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +41,10 @@
 		F9C6031128EF0B1D00DDF334 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		F9C6031328F1B32A00DDF334 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		F9C6031828F4600A00DDF334 /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
+		F9C6031B28FAD37900DDF334 /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
+		F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
+		F9DB12F2296B397A0067578D /* CheckboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxDelegate.swift; sourceTree = "<group>"; };
+		F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScreenDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +77,8 @@
 		F9C602EA28EF054600DDF334 /* MyHabits */ = {
 			isa = PBXGroup;
 			children = (
+				F9DB12F1296B39510067578D /* Delegates */,
+				F9C6031A28FAD35900DDF334 /* Views */,
 				F9C6031728F45FF100DDF334 /* Utils */,
 				F9C6030B28EF09FC00DDF334 /* Controllers */,
 				F9C6030628EF07E000DDF334 /* Data */,
@@ -113,6 +125,25 @@
 				F9C6031828F4600A00DDF334 /* TextUtils.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		F9C6031A28FAD35900DDF334 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F9C6031B28FAD37900DDF334 /* HabitCollectionViewCell.swift */,
+				F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */,
+				F9A8196C290562FB0033060A /* Checkbox.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F9DB12F1296B39510067578D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				F9DB12F2296B397A0067578D /* CheckboxDelegate.swift */,
+				F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */,
+			);
+			path = Delegates;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,13 +219,18 @@
 			files = (
 				F9C602EC28EF054600DDF334 /* AppDelegate.swift in Sources */,
 				F9C6031028EF0AE900DDF334 /* HabitsViewController.swift in Sources */,
+				F9C6031E28FADBA700DDF334 /* ProgressCollectionViewCell.swift in Sources */,
 				F9C6030828EF07F400DDF334 /* Habit.swift in Sources */,
 				F9C6030D28EF0A1400DDF334 /* TabBarController.swift in Sources */,
 				F9C6030A28EF082900DDF334 /* HabitsStore.swift in Sources */,
 				F9C6031228EF0B1D00DDF334 /* InfoViewController.swift in Sources */,
 				F9C6031428F1B32A00DDF334 /* HabitViewController.swift in Sources */,
+				F9DB12F3296B397A0067578D /* CheckboxDelegate.swift in Sources */,
+				F9DB12F5296B487A0067578D /* UpdateScreenDelegate.swift in Sources */,
+				F9A8196D290562FB0033060A /* Checkbox.swift in Sources */,
 				F9C6031928F4600A00DDF334 /* TextUtils.swift in Sources */,
 				F9C602EE28EF054600DDF334 /* SceneDelegate.swift in Sources */,
+				F9C6031C28FAD37A00DDF334 /* HabitCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
