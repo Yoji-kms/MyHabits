@@ -33,7 +33,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    public lazy var chechbox: Checkbox = {
+    private lazy var chechbox: Checkbox = {
         let checkbox = Checkbox()
         checkbox.translatesAutoresizingMaskIntoConstraints = false
         return checkbox
