@@ -197,6 +197,7 @@ class HabitViewController:UIViewController {
         self.navigationItem.leftBarButtonItem = self.cancelBtn
         self.navigationItem.title = NSLocalizedString("Create", comment: "Create")
         self.navigationItem.rightBarButtonItem = self.saveBtn
+        self.navigationController?.navigationBar.prefersLargeTitles = false
     }
     
 //    MARK: Attributing

@@ -41,16 +41,23 @@ class HabitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "Light Gray")
-        self.navigationItem.rightBarButtonItem = addBtn
-        self.navigationItem.title = NSLocalizedString("Today", comment: "Today")
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
+
+        setupNavigation()
         setupViews()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.updateProgress()
+        setupLargeTitle()
+    }
+    
+    private func setupLargeTitle() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func setupNavigation() {
+        self.navigationItem.rightBarButtonItem = addBtn
+        self.navigationItem.title = NSLocalizedString("Today", comment: "Today")
     }
     
     private func setupViews() {
@@ -137,6 +144,15 @@ extension HabitsViewController: UICollectionViewDataSource {
         habitCell.delegate = self
         
         return habitCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            let habitDetailsVC = HabitDetailsViewController()
+            habitDetailsVC.habit = HabitsStore.shared.habits[indexPath.row]
+
+            self.navigationController?.pushViewController(habitDetailsVC, animated: true)
+        }
     }
 }
 

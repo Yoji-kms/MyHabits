@@ -23,6 +23,8 @@
 		F9C6031E28FADBA700DDF334 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */; };
 		F9DB12F3296B397A0067578D /* CheckboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F2296B397A0067578D /* CheckboxDelegate.swift */; };
 		F9DB12F5296B487A0067578D /* UpdateScreenDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */; };
+		F9DB12F72982B72C0067578D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F62982B72C0067578D /* HabitDetailsViewController.swift */; };
+		F9DB12F92982BB9B0067578D /* HabitDatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F82982BB9B0067578D /* HabitDatesTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		F9DB12F2296B397A0067578D /* CheckboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxDelegate.swift; sourceTree = "<group>"; };
 		F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScreenDelegate.swift; sourceTree = "<group>"; };
+		F9DB12F62982B72C0067578D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
+		F9DB12F82982BB9B0067578D /* HabitDatesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDatesTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 				F9C6030F28EF0AE900DDF334 /* HabitsViewController.swift */,
 				F9C6031128EF0B1D00DDF334 /* InfoViewController.swift */,
 				F9C6031328F1B32A00DDF334 /* HabitViewController.swift */,
+				F9DB12F62982B72C0067578D /* HabitDetailsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 				F9C6031B28FAD37900DDF334 /* HabitCollectionViewCell.swift */,
 				F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */,
 				F9A8196C290562FB0033060A /* Checkbox.swift */,
+				F9DB12F82982BB9B0067578D /* HabitDatesTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,6 +227,7 @@
 				F9C6031028EF0AE900DDF334 /* HabitsViewController.swift in Sources */,
 				F9C6031E28FADBA700DDF334 /* ProgressCollectionViewCell.swift in Sources */,
 				F9C6030828EF07F400DDF334 /* Habit.swift in Sources */,
+				F9DB12F92982BB9B0067578D /* HabitDatesTableViewCell.swift in Sources */,
 				F9C6030D28EF0A1400DDF334 /* TabBarController.swift in Sources */,
 				F9C6030A28EF082900DDF334 /* HabitsStore.swift in Sources */,
 				F9C6031228EF0B1D00DDF334 /* InfoViewController.swift in Sources */,
@@ -230,6 +237,7 @@
 				F9A8196D290562FB0033060A /* Checkbox.swift in Sources */,
 				F9C6031928F4600A00DDF334 /* TextUtils.swift in Sources */,
 				F9C602EE28EF054600DDF334 /* SceneDelegate.swift in Sources */,
+				F9DB12F72982B72C0067578D /* HabitDetailsViewController.swift in Sources */,
 				F9C6031C28FAD37A00DDF334 /* HabitCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

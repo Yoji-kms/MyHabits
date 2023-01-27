@@ -14,8 +14,8 @@
             filePath = "MyHabits/Controllers/ViewControllers/HabitsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "checkboxTap()"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,9 +30,9 @@
             filePath = "MyHabits/Controllers/ViewControllers/HabitViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "saveBtnTap()"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "getAttributedEveryDayString()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,8 +46,8 @@
             filePath = "MyHabits/Controllers/ViewControllers/HabitsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "updateProgress()"
             landmarkType = "7">
          </BreakpointContent>
