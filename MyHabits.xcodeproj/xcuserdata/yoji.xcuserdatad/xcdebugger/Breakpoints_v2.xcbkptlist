@@ -30,8 +30,8 @@
             filePath = "MyHabits/Controllers/ViewControllers/HabitViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "getAttributedEveryDayString()"
             landmarkType = "7">
          </BreakpointContent>
