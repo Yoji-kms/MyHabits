@@ -72,7 +72,8 @@ class HabitDetailsViewController: UIViewController {
         }
 
         habitVC.setup(with: habit)
-        habitVC.delegate = self.delegate
+        habitVC.updateScreenDelegate = self.delegate
+        habitVC.updateTitleDelegate = self
         self.navigationController?.pushViewController(habitVC, animated: true)
     }
 }
@@ -108,3 +109,11 @@ extension HabitDetailsViewController: UITableViewDelegate {
         return header
     }
 }
+
+extension HabitDetailsViewController: UpdateTitleDelegate {
+    func updateTitle(newHabit: Habit) {
+        self.habit = newHabit
+        self.navigationItem.title = newHabit.name
+    }
+}
+
