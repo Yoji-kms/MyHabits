@@ -207,7 +207,6 @@ class HabitViewController:UIViewController {
             
             self.timeLabel.topAnchor.constraint(equalTo: self.colourCircleBtn.bottomAnchor, constant: 24),
             self.timeLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
-            
             self.everyDayLabel.topAnchor.constraint(equalTo: self.timeLabel.bottomAnchor, constant: 8),
             self.everyDayLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
 
