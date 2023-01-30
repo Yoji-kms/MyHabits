@@ -49,6 +49,7 @@ class HabitDatesTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             self.dateLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             self.dateLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            self.dateLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -16),
             
             self.checkImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             self.checkImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),

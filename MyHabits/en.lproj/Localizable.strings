@@ -29,5 +29,7 @@
 "Today" = "Today";
 "Yesterday" = "Yesterday";
 "The day before yesterday" = "The day before yesterday";
-"Activity" = "Activity";
+"Activity" = "ACTIVITY";
 "Edit" = "Edit";
+"Remove habit" = "Remove habit";
+"Do you want to remove habit" = "Do you want to remove habit";

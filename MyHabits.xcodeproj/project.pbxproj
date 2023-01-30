@@ -25,6 +25,7 @@
 		F9DB12F5296B487A0067578D /* UpdateScreenDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */; };
 		F9DB12F72982B72C0067578D /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F62982B72C0067578D /* HabitDetailsViewController.swift */; };
 		F9DB12F92982BB9B0067578D /* HabitDatesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12F82982BB9B0067578D /* HabitDatesTableViewCell.swift */; };
+		F9DB12FB2986A9620067578D /* HabitDatesTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9DB12FA2986A9620067578D /* HabitDatesTableHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		F9DB12F4296B487A0067578D /* UpdateScreenDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateScreenDelegate.swift; sourceTree = "<group>"; };
 		F9DB12F62982B72C0067578D /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		F9DB12F82982BB9B0067578D /* HabitDatesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDatesTableViewCell.swift; sourceTree = "<group>"; };
+		F9DB12FA2986A9620067578D /* HabitDatesTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDatesTableHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 				F9C6031D28FADBA700DDF334 /* ProgressCollectionViewCell.swift */,
 				F9A8196C290562FB0033060A /* Checkbox.swift */,
 				F9DB12F82982BB9B0067578D /* HabitDatesTableViewCell.swift */,
+				F9DB12FA2986A9620067578D /* HabitDatesTableHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				F9C602EC28EF054600DDF334 /* AppDelegate.swift in Sources */,
 				F9C6031028EF0AE900DDF334 /* HabitsViewController.swift in Sources */,
 				F9C6031E28FADBA700DDF334 /* ProgressCollectionViewCell.swift in Sources */,
+				F9DB12FB2986A9620067578D /* HabitDatesTableHeader.swift in Sources */,
 				F9C6030828EF07F400DDF334 /* Habit.swift in Sources */,
 				F9DB12F92982BB9B0067578D /* HabitDatesTableViewCell.swift in Sources */,
 				F9C6030D28EF0A1400DDF334 /* TabBarController.swift in Sources */,

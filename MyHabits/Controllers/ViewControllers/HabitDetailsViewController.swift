@@ -8,22 +8,38 @@
 import UIKit
 
 class HabitDetailsViewController: UIViewController {
-    var habit: Habit?
+    private var habit: Habit?
     let dates = HabitsStore.shared.dates
+    weak var delegate: UpdateScreenDelegate?
+    
     private lazy var habitDatesTableView: UITableView = {
         let tblView = UITableView()
         tblView.register(HabitDatesTableViewCell.self, forCellReuseIdentifier: "HabitDatesTableViewCell")
         tblView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
+        tblView.register(HabitDatesTableHeader.self, forHeaderFooterViewReuseIdentifier: "HabitDatesTableHeader")
+        tblView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "DefaultHeader")
         tblView.dataSource = self
+        tblView.delegate = self
         tblView.translatesAutoresizingMaskIntoConstraints = false
         
         return tblView
     }()
     
+    private lazy var editBtn: UIBarButtonItem = {
+        let btn = UIBarButtonItem()
+        btn.title = NSLocalizedString("Edit", comment: "Edit")
+        btn.target = self
+        btn.action = #selector(editBtnTap)
+        btn.tintColor = UIColor(named: "Purple")
+        
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = .white
         setupView()
+        setupNavController()
     }
     
     private func setupView() {
@@ -35,6 +51,29 @@ class HabitDetailsViewController: UIViewController {
             self.habitDatesTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
             self.habitDatesTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    
+    private func setupNavController() {
+        self.navigationController?.navigationBar.tintColor = UIColor(named: "Purple")
+        self.navigationItem.rightBarButtonItem = self.editBtn
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    func setup(with viewModel: Habit){
+        self.navigationItem.title = viewModel.name
+        self.habit = viewModel
+    }
+    
+    @objc private func editBtnTap() {
+        let habitVC = HabitViewController()
+        guard let habit = self.habit else {
+            return
+        }
+
+        habitVC.setup(with: habit)
+        habitVC.delegate = self.delegate
+        self.navigationController?.pushViewController(habitVC, animated: true)
     }
 }
 
@@ -56,9 +95,16 @@ extension HabitDetailsViewController: UITableViewDataSource {
         cell.clipsToBounds = true
         return cell
     }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+}
+
+extension HabitDetailsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "HabitDatesTableHeader") as? HabitDatesTableHeader
+        else {
+            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "DefaultHeader")
+            return header
+        }
+        
+        return header
     }
 }

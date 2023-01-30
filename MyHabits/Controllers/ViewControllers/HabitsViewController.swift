@@ -149,7 +149,9 @@ extension HabitsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
             let habitDetailsVC = HabitDetailsViewController()
-            habitDetailsVC.habit = HabitsStore.shared.habits[indexPath.row]
+            let habit = HabitsStore.shared.habits[indexPath.row]
+            habitDetailsVC.setup(with: habit)
+            habitDetailsVC.delegate = self
 
             self.navigationController?.pushViewController(habitDetailsVC, animated: true)
         }

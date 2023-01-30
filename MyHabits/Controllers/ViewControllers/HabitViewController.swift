@@ -15,6 +15,17 @@ class HabitViewController:UIViewController {
         return formatter
     }()
     
+    private lazy var removeHabitBtn: UIButton = {
+        let btn = UIButton()
+        btn.setTitle(NSLocalizedString("Remove habit", comment: "Remove habit"), for: .normal)
+        btn.setTitleColor(.systemRed, for: .normal)
+        btn.isHidden = true
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.addTarget(self, action: #selector(removeHabitBtnTap), for: .touchUpInside)
+        
+        return btn
+    }()
+    
     private lazy var cancelBtn: UIBarButtonItem = {
         let btn = UIBarButtonItem()
         btn.title = NSLocalizedString("Cancel", comment: "Cancel")
@@ -70,14 +81,14 @@ class HabitViewController:UIViewController {
         return txtView
     }()
     
-    private lazy var colorLabel: UILabel = {
+    private lazy var colourLabel: UILabel = {
         let label = UILabel()
         label.text = NSLocalizedString("Color", comment: "Color")
         label.footnoteCapsSetup()
         return label
     }()
     
-    private lazy var colorCircleBtn: UIButton = {
+    private lazy var colourCircleBtn: UIButton = {
         let btn = UIButton()
         btn.backgroundColor = UIColor(named: "Orange")
         btn.layer.cornerRadius = 15
@@ -115,6 +126,8 @@ class HabitViewController:UIViewController {
         return picker
     }()
     
+    private var habit: Habit?
+    
     weak var delegate: UpdateScreenDelegate?
     
 //    MARK: Lifecycle
@@ -125,6 +138,15 @@ class HabitViewController:UIViewController {
         setupNavController()
         setupViews()
         setupGestures()
+    }
+    
+    func setup(with viewModel: Habit) {
+        self.timePicker.date = viewModel.date
+        self.colourCircleBtn.backgroundColor = viewModel.color
+        self.txtView.text = viewModel.name
+        self.txtView.headline()
+        self.removeHabitBtn.isHidden = false
+        self.habit = viewModel
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -150,11 +172,12 @@ class HabitViewController:UIViewController {
         
         self.backgroundViewWihPadding.addSubview(self.titleLabel)
         self.backgroundViewWihPadding.addSubview(self.txtView)
-        self.backgroundViewWihPadding.addSubview(self.colorLabel)
-        self.backgroundViewWihPadding.addSubview(self.colorCircleBtn)
+        self.backgroundViewWihPadding.addSubview(self.colourLabel)
+        self.backgroundViewWihPadding.addSubview(self.colourCircleBtn)
         self.backgroundViewWihPadding.addSubview(self.timeLabel)
         self.backgroundViewWihPadding.addSubview(self.everyDayLabel)
         self.backgroundViewWihPadding.addSubview(self.timePicker)
+        self.backgroundViewWihPadding.addSubview(self.removeHabitBtn)
         
         NSLayoutConstraint.activate([
             self.borderView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -175,14 +198,14 @@ class HabitViewController:UIViewController {
             self.txtView.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 8),
             self.txtView.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
             
-            self.colorLabel.topAnchor.constraint(equalTo: self.txtView.bottomAnchor, constant: 24),
-            self.colorLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
+            self.colourLabel.topAnchor.constraint(equalTo: self.txtView.bottomAnchor, constant: 24),
+            self.colourLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
             
-            self.colorCircleBtn.topAnchor.constraint(equalTo: self.colorLabel.bottomAnchor, constant: 8),
-            self.colorCircleBtn.heightAnchor.constraint(equalToConstant: 30),
-            self.colorCircleBtn.widthAnchor.constraint(equalTo: self.colorCircleBtn.heightAnchor),
+            self.colourCircleBtn.topAnchor.constraint(equalTo: self.colourLabel.bottomAnchor, constant: 8),
+            self.colourCircleBtn.heightAnchor.constraint(equalToConstant: 30),
+            self.colourCircleBtn.widthAnchor.constraint(equalTo: self.colourCircleBtn.heightAnchor),
             
-            self.timeLabel.topAnchor.constraint(equalTo: self.colorCircleBtn.bottomAnchor, constant: 24),
+            self.timeLabel.topAnchor.constraint(equalTo: self.colourCircleBtn.bottomAnchor, constant: 24),
             self.timeLabel.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
             
             self.everyDayLabel.topAnchor.constraint(equalTo: self.timeLabel.bottomAnchor, constant: 8),
@@ -190,6 +213,9 @@ class HabitViewController:UIViewController {
 
             self.timePicker.topAnchor.constraint(equalTo: self.everyDayLabel.bottomAnchor, constant: 8),
             self.timePicker.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor),
+            
+            self.removeHabitBtn.bottomAnchor.constraint(equalTo: self.backgroundViewWihPadding.bottomAnchor, constant: -8),
+            self.removeHabitBtn.widthAnchor.constraint(equalTo: self.backgroundViewWihPadding.widthAnchor)
         ])
     }
     
@@ -214,28 +240,40 @@ class HabitViewController:UIViewController {
 //    MARK: Actions
     @objc private func cancelBtnTap() {
         navigationController?.popViewController(animated: true)
+        self.habit = nil
     }
     
     @objc private func saveBtnTap() {
-        let savingHabit = Habit(
-            name: txtView.text,
-            date: timePicker.date,
-            color: colorCircleBtn.backgroundColor ?? .systemOrange
-        )
         let store = HabitsStore.shared
-        store.habits.append(savingHabit)
-        navigationController?.popViewController(animated: true)
+        if self.habit == nil {
+            let savingHabit = Habit(
+                name: txtView.text,
+                date: timePicker.date,
+                color: colourCircleBtn.backgroundColor ?? .systemOrange
+            )
+            store.habits.append(savingHabit)
+        } else {
+            store.habits.forEach { editingHabit in
+                if editingHabit == self.habit {
+                    editingHabit.name = txtView.text
+                    editingHabit.date = timePicker.date
+                    editingHabit.color = colourCircleBtn.backgroundColor ?? .systemOrange
+                }
+            }
+        }
+        
         guard let delegate = self.delegate else {
             return
         }
-        print(store.todayProgress * 100)
 
         delegate.updateScreen?()
+        self.habit = nil
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func colorCircleTap() {
         let colorPicker = UIColorPickerViewController()
-        colorPicker.selectedColor = self.colorCircleBtn.backgroundColor ?? .white
+        colorPicker.selectedColor = self.colourCircleBtn.backgroundColor ?? .white
         colorPicker.delegate = self
         self.navigationController?.present(colorPicker, animated: true, completion:nil)
     }
@@ -243,6 +281,7 @@ class HabitViewController:UIViewController {
     @objc private func timeChanged() {
         time = dateFormatter.string(from: self.timePicker.date)
         everyDayLabel.attributedText = getAttributedEveryDayString()
+        self.enableSaveBtn()
     }
     
     @objc private func didHideKeyboard(_ notification: Notification) {
@@ -252,16 +291,39 @@ class HabitViewController:UIViewController {
     @objc private func forcedHidingKeyboard() {
         self.view.endEditing(true)
     }
+    
+    @objc private func removeHabitBtnTap() {
+        let store = HabitsStore.shared
+        
+        store.habits.removeAll(where: { $0 == habit })
+        
+        guard let delegate = self.delegate else {
+            return
+        }
+
+        delegate.updateScreen?()
+
+        self.habit = nil
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    private func enableSaveBtn() {
+        if self.txtView.text != NSLocalizedString("Run in the morning...", comment: "Run...") {
+            self.saveBtn.isEnabled = true
+        }
+    }
 }
 
 //MARK: Extensions
 extension HabitViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        self.colorCircleBtn.backgroundColor = viewController.selectedColor
+        self.colourCircleBtn.backgroundColor = viewController.selectedColor
+        self.enableSaveBtn()
     }
     
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
-        self.colorCircleBtn.backgroundColor = viewController.selectedColor
+        self.colourCircleBtn.backgroundColor = viewController.selectedColor
+        self.enableSaveBtn()
     }
 }
 
@@ -275,7 +337,7 @@ extension HabitViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty || textView.text == "" {
-            textView.textColor = .lightGray
+            textView.body()
             textView.text = NSLocalizedString("Run in the morning...", comment: "Run...")
         } else {
             self.saveBtn.isEnabled = true
