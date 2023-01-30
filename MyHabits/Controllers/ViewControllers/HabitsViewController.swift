@@ -76,7 +76,7 @@ class HabitsViewController: UIViewController {
         let habitVC = HabitViewController()
         habitVC.modalTransitionStyle = .coverVertical
         habitVC.modalPresentationStyle = .popover
-        habitVC.delegate = self
+        habitVC.updateScreenDelegate = self
            
         self.navigationController?.pushViewController(habitVC, animated: true)
     }

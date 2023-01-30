@@ -128,7 +128,8 @@ class HabitViewController:UIViewController {
     
     private var habit: Habit?
     
-    weak var delegate: UpdateScreenDelegate?
+    weak var updateScreenDelegate: UpdateScreenDelegate?
+    weak var updateTitleDelegate: UpdateTitleDelegate?
     
 //    MARK: Lifecycle
     override func viewDidLoad() {
@@ -259,9 +260,11 @@ class HabitViewController:UIViewController {
                     editingHabit.color = colourCircleBtn.backgroundColor ?? .systemOrange
                 }
             }
+            guard let habit = habit else { return }
+            updateTitleDelegate?.updateTitle(newHabit: habit)
         }
         
-        guard let delegate = self.delegate else {
+        guard let delegate = self.updateScreenDelegate else {
             return
         }
 
@@ -296,7 +299,7 @@ class HabitViewController:UIViewController {
         
         store.habits.removeAll(where: { $0 == habit })
         
-        guard let delegate = self.delegate else {
+        guard let delegate = self.updateScreenDelegate else {
             return
         }
 
