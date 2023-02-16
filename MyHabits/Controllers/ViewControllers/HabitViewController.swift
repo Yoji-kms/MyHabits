@@ -128,7 +128,7 @@ final class HabitViewController:UIViewController {
     
     private var habit: Habit?
     
-    weak var updateScreenDelegate: UpdateScreenDelegate?
+    weak var updateScreenDelegate: UpdateCollectionDelegate?
     weak var updateTitleDelegate: UpdateTitleDelegate?
     
 //    MARK: Lifecycle
@@ -245,6 +245,11 @@ final class HabitViewController:UIViewController {
     
     @objc private func saveBtnTap() {
         let store = HabitsStore.shared
+        
+        guard let delegate = self.updateScreenDelegate else {
+            return
+        }
+        
         if self.habit == nil {
             let savingHabit = Habit(
                 name: txtView.text,
@@ -252,6 +257,7 @@ final class HabitViewController:UIViewController {
                 color: colourCircleBtn.backgroundColor ?? .systemOrange
             )
             store.habits.append(savingHabit)
+            delegate.insert?()
         } else {
             store.habits.forEach { editingHabit in
                 if editingHabit == self.habit {
@@ -261,14 +267,11 @@ final class HabitViewController:UIViewController {
                 }
             }
             guard let habit = habit else { return }
+            guard let indexPath = habit.getIndexPath() else { return }
             updateTitleDelegate?.updateTitle(newHabit: habit)
+            delegate.update?(index: indexPath)
         }
         
-        guard let delegate = self.updateScreenDelegate else {
-            return
-        }
-
-        delegate.updateScreen?()
         self.habit = nil
         navigationController?.popViewController(animated: true)
     }
@@ -297,13 +300,14 @@ final class HabitViewController:UIViewController {
     @objc private func removeHabitBtnTap() {
         let store = HabitsStore.shared
         
+        guard let indexPath = habit?.getIndexPath() else { return }
         store.habits.removeAll(where: { $0 == habit })
         
         guard let delegate = self.updateScreenDelegate else {
             return
         }
-
-        delegate.updateScreen?()
+    
+        delegate.remove?(index: indexPath)
 
         self.habit = nil
         navigationController?.popToRootViewController(animated: true)

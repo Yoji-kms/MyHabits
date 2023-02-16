@@ -10,7 +10,7 @@ import UIKit
 final class HabitDetailsViewController: UIViewController {
     private var habit: Habit?
     let dates = HabitsStore.shared.dates
-    weak var delegate: UpdateScreenDelegate?
+    weak var delegate: UpdateCollectionDelegate?
     
     private lazy var habitDatesTableView: UITableView = {
         let tblView = UITableView()

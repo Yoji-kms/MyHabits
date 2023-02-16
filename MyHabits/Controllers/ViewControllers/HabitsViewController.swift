@@ -42,7 +42,6 @@ final class HabitsViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
 
-//        setupNavigation()
         setupViews()
     }
 
@@ -170,9 +169,27 @@ extension HabitsViewController: CheckboxDelegate {
         updateProgress()
     }
 }
-extension HabitsViewController: UpdateScreenDelegate {
-    func updateScreen() {
-        self.habitsCollectionView.reloadSections(IndexSet(integer: 1))
+extension HabitsViewController: UpdateCollectionDelegate {
+    func insert() {
+        self.habitsCollectionView.performBatchUpdates{
+            let index = IndexPath(row: HabitsStore.shared.habits.count - 1, section: 1)
+            self.habitsCollectionView.insertItems(at: [index])
+        }
+//        self.insertHabit()
+        updateProgress()
+    }
+    
+    func remove(index: IndexPath) {
+        self.habitsCollectionView.performBatchUpdates{
+            self.habitsCollectionView.deleteItems(at: [index])
+        }
+        updateProgress()
+    }
+    
+    func update(index: IndexPath) {
+        self.habitsCollectionView.performBatchUpdates{
+            self.habitsCollectionView.reloadItems(at: [index])
+        }
         updateProgress()
     }
 }
