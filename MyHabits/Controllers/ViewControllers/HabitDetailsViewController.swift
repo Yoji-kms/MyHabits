@@ -7,13 +7,14 @@
 
 import UIKit
 
-class HabitDetailsViewController: UIViewController {
+final class HabitDetailsViewController: UIViewController {
     private var habit: Habit?
     let dates = HabitsStore.shared.dates
     weak var delegate: UpdateScreenDelegate?
     
     private lazy var habitDatesTableView: UITableView = {
         let tblView = UITableView()
+        tblView.backgroundColor = UIColor(named: "Light Gray")
         tblView.register(HabitDatesTableViewCell.self, forCellReuseIdentifier: "HabitDatesTableViewCell")
         tblView.register(UITableViewCell.self, forCellReuseIdentifier: "DefaultCell")
         tblView.register(HabitDatesTableHeader.self, forHeaderFooterViewReuseIdentifier: "HabitDatesTableHeader")

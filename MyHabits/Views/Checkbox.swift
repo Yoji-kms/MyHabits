@@ -7,7 +7,7 @@
 
 import UIKit
 
-class Checkbox: UIButton {
+final class Checkbox: UIButton {
     let checkedImage = UIImage(systemName: "checkmark.circle.fill")
     let uncheckedImage = UIImage(systemName: "circle")
         

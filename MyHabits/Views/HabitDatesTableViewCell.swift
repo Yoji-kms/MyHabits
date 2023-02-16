@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitDatesTableViewCell: UITableViewCell {
+final class HabitDatesTableViewCell: UITableViewCell {
     private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.bodySetup()

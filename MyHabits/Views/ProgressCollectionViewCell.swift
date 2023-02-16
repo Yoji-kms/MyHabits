@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProgressCollectionViewCell: UICollectionViewCell {
+final class ProgressCollectionViewCell: UICollectionViewCell {
     private lazy var justDoItLabel: UILabel = {
         let label = UILabel()
         label.footnoteStatusSetup()

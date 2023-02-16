@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitViewController:UIViewController {
+final class HabitViewController:UIViewController {
 //    MARK: Views
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

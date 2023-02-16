@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitsViewController: UIViewController {
+final class HabitsViewController: UIViewController {
 //    MARK: Views
     private lazy var addBtn: UIBarButtonItem = {
         let btn = UIBarButtonItem()
@@ -28,7 +28,7 @@ class HabitsViewController: UIViewController {
         let colView = UICollectionView(frame: .zero, collectionViewLayout: self.habitLayout)
         colView.delegate = self
         colView.dataSource = self
-        colView.backgroundColor = .lightGray
+        colView.backgroundColor = UIColor(named: "Light Gray")
         colView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: "ProgressCellId")
         colView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: "HabitCellId")
         colView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCellId")
@@ -40,15 +40,22 @@ class HabitsViewController: UIViewController {
 //  MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: "Light Gray")
+        self.view.backgroundColor = .white
 
-        setupNavigation()
+//        setupNavigation()
         setupViews()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupLargeTitle()
+        setupNavigation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationItem.title = nil
+        self.navigationController?.navigationBar.layoutIfNeeded()
     }
     
     private func setupLargeTitle() {

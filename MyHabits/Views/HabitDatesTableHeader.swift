@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitDatesTableHeader: UITableViewHeaderFooterView {
+final class HabitDatesTableHeader: UITableViewHeaderFooterView {
     private lazy var headerLabel: UILabel = {
         let lbl = UILabel()
         lbl.footnoteSetup()

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitCollectionViewCell: UICollectionViewCell {
+final class HabitCollectionViewCell: UICollectionViewCell {
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
