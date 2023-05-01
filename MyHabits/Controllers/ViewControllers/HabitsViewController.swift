@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitsViewController: UIViewController {
+final class HabitsViewController: UIViewController {
 //    MARK: Views
     private lazy var addBtn: UIBarButtonItem = {
         let btn = UIBarButtonItem()
@@ -28,7 +28,7 @@ class HabitsViewController: UIViewController {
         let colView = UICollectionView(frame: .zero, collectionViewLayout: self.habitLayout)
         colView.delegate = self
         colView.dataSource = self
-        colView.backgroundColor = .lightGray
+        colView.backgroundColor = UIColor(named: "Light Gray")
         colView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: "ProgressCellId")
         colView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: "HabitCellId")
         colView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "DefaultCellId")
@@ -40,17 +40,30 @@ class HabitsViewController: UIViewController {
 //  MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: "Light Gray")
-        self.navigationItem.rightBarButtonItem = addBtn
-        self.navigationItem.title = NSLocalizedString("Today", comment: "Today")
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        
+        self.view.backgroundColor = .white
+
         setupViews()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        self.updateProgress()
+        setupLargeTitle()
+        setupNavigation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationItem.title = nil
+        self.navigationController?.navigationBar.layoutIfNeeded()
+    }
+    
+    private func setupLargeTitle() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func setupNavigation() {
+        self.navigationItem.rightBarButtonItem = addBtn
+        self.navigationItem.title = NSLocalizedString("Today", comment: "Today")
     }
     
     private func setupViews() {
@@ -69,7 +82,7 @@ class HabitsViewController: UIViewController {
         let habitVC = HabitViewController()
         habitVC.modalTransitionStyle = .coverVertical
         habitVC.modalPresentationStyle = .popover
-        habitVC.delegate = self
+        habitVC.updateScreenDelegate = self
            
         self.navigationController?.pushViewController(habitVC, animated: true)
     }
@@ -138,6 +151,17 @@ extension HabitsViewController: UICollectionViewDataSource {
         
         return habitCell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            let habitDetailsVC = HabitDetailsViewController()
+            let habit = HabitsStore.shared.habits[indexPath.row]
+            habitDetailsVC.setup(with: habit)
+            habitDetailsVC.delegate = self
+
+            self.navigationController?.pushViewController(habitDetailsVC, animated: true)
+        }
+    }
 }
 
 extension HabitsViewController: CheckboxDelegate {
@@ -145,9 +169,27 @@ extension HabitsViewController: CheckboxDelegate {
         updateProgress()
     }
 }
-extension HabitsViewController: UpdateScreenDelegate {
-    func updateScreen() {
-        self.habitsCollectionView.reloadSections(IndexSet(integer: 1))
+extension HabitsViewController: UpdateCollectionDelegate {
+    func insert() {
+        self.habitsCollectionView.performBatchUpdates{
+            let index = IndexPath(row: HabitsStore.shared.habits.count - 1, section: 1)
+            self.habitsCollectionView.insertItems(at: [index])
+        }
+//        self.insertHabit()
+        updateProgress()
+    }
+    
+    func remove(index: IndexPath) {
+        self.habitsCollectionView.performBatchUpdates{
+            self.habitsCollectionView.deleteItems(at: [index])
+        }
+        updateProgress()
+    }
+    
+    func update(index: IndexPath) {
+        self.habitsCollectionView.performBatchUpdates{
+            self.habitsCollectionView.reloadItems(at: [index])
+        }
         updateProgress()
     }
 }

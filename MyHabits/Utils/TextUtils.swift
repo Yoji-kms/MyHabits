@@ -71,6 +71,16 @@ extension UITextView {
         self.textContainer.lineBreakMode = .byClipping
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func headline() {
+        self.textColor = .systemBlue
+        self.font = .systemFont(ofSize: 17, weight: .semibold)
+    }
+    
+    func body() {
+        self.textColor = .lightGray
+        self.font = .systemFont(ofSize: 17, weight: .regular)
+    }
 }
 
 
